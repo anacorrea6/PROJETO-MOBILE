@@ -12,8 +12,8 @@ import {
   salvarComprasStorage,
 } from "./src/services/storage.js";
 
-import CadastroProdutos from "./src/components/cadastros";
-import Compras from "./src/components/compras";
+import CadastroProdutos from "./src/components/CadastrosProduto.js";
+import Compras from "./src/components/Compras.js";
 
 export default function App() {
   // Armazena a lista de compras e produtos que estão na memória
@@ -63,9 +63,7 @@ export default function App() {
     atualizarEGuardar(filtrados);
   };
 
-  // ---------------------------------------------------------------------------
-  // RENDERIZAÇÃO DA INTERFACE (JSX)
-  // ---------------------------------------------------------------------------
+
 
   return (
     // SafeAreaView garante que o aplicativo respeite as bordas do sistema
@@ -94,9 +92,6 @@ export default function App() {
   );
 }
 
-// ---------------------------------------------------------------------------
-// ESTILIZAÇÃO DA TELA PRINCIPAL (StyleSheet)
-// ---------------------------------------------------------------------------
 
 const styles = StyleSheet.create({
   // Preenche toda a tela com fundo cinza claro e espaçamento superior
