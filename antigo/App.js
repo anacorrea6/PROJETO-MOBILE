@@ -10,10 +10,10 @@ import {
 import {
   buscarComprasStorage,
   salvarComprasStorage,
-} from "./src/services/storage.js";
+} from "../src/services/storage.js";
 
-import CadastroProdutos from "./src/components/CadastrosProduto.js";
-import Compras from "./src/components/Compras.js";
+import CadastroProdutos from "../src/components/CadastrosProduto.js";
+import Compras from "../src/components/Compras.js";
 
 export default function App() {
   // Armazena a lista de compras e produtos que estão na memória
