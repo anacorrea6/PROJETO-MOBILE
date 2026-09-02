@@ -24,9 +24,48 @@ export default function ControleComprasScreen() {
   const [available, setAvailable] = useState(null);
   const subscriptionRef = useRef(null);
 
-  // useEffect(() => { 
-  // })
-  // function start()
+ useEffect(() => { 
+    if (carregando) return;
+
+    AsyncStorage.setItem(CHAVE_STORAGE, JSON.stringify(itens)).catch(
+    (erro) => {
+      console.error("Erro ao salvar itens no storage:", erro);
+    },
+  );
+}, [itens, carregando]);
+
+ // o function start  ele liga o sensor, ou seja ele ve os movimentos do celular 
+function start() {
+    Accelerometer.setUpdateInterval(UPDATE_INTERVAL_MS); // accelerometer ele Diz ao celular de quanto em quanto tempo ele deve ler o sensor.
+    subscriptionRef.current = Accelerometer.addListener((measurement) => {
+      setData(measurement);
+    });
+    setActive(true);
+  }
+
+  function stop() {// esse stop ele desliga o sensor 
+    subscriptionRef.current?.remove();
+    subscriptionRef.current = null; // ele limpa a memoria 
+    setActive(false); // ele avisa o aplicativo quando o sensor esta ligado 
+  }
+
+  function triggerAgitarLimpar() {
+    stop();
+    Alert.alert(
+      "Agitar Detectado! 🛒",
+      "Deseja limpar todos os itens concluídos do carrinho?",
+      [
+        { text: "Cancelar", onPress: () => start(), style: "cancel" },
+        { 
+          text: "Limpar", 
+          onPress: () => {
+            setItens(listaAtual => listaAtual.filter(item => !item.concluido));
+            start();
+          } 
+        }
+      ]
+    );
+  }
 
 
 }
